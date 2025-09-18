@@ -1,4 +1,8 @@
 from database import get_connection
+import hashlib
+
+def hash_password(password: str) -> str:
+    return hashlib.sha256(password.encode()).hexdigest()
 
 # ------------------ USERS ------------------ #
 def create_user(name, email, password):
@@ -13,6 +17,12 @@ def get_user_by_email(email):
         cursor = conn.cursor()
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         return cursor.fetchone()
+
+def  login():
+    user = get_user_by_email(email)
+    if user and user[3] == hash_password(password):
+        return user
+    return None
 
 # ------------------ TASKS ------------------ #
 def add_task(title, description, due_date, user_id):

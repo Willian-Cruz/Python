@@ -5,14 +5,19 @@ def main():
     create_tables()
     print("=== Gerenciador de Tarefas ===")
 
-    # Criar usuário para teste
+    # Criar usuário inicial(caso não exista)
     if not get_user_by_email("teste@email.com"):
         create_user("Usuário Teste", "teste@email.com", "1234")
 
     user = get_user_by_email("teste@email.com")
     user_id = user[0]
 
-    while True:
+# ------------------ LOGIN ------------------ #
+print("\n🔐 Faça login abaixo: ")
+email = input("E-mail: ")
+senha = input("Senha: ")
+# ------------------ MENU ------------------ #
+while True:
         print("\n1. Listar Tarefas\n2. Adicionar Tarefa\n3. Atualizar Status\n4. Excluir Tarefa\n5. Sair")
         opcao = input("Escolha uma opção: ")
 
